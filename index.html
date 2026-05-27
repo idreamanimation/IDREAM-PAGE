@@ -2073,7 +2073,7 @@
                 const content = document.getElementById("projectContent");
                 const projectMediaValue = (p.media ?? p.img ?? "").trim();
                 const extraMediaValue = (p.extraMedia ?? "").trim();
-                const projectMediaSrc = extractMediaSrc(projectMediaValue);
+                const projectMediaSrc = projectMediaValue;
                 const projectMediaIsVideo = isVideoMedia(projectMediaValue);
 
                 content.innerHTML = `
