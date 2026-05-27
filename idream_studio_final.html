@@ -1,0 +1,2354 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>iDream Studio — Animation & Motion Design</title>
+        <style>
+            *,
+            *::before,
+            *::after {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --bg: #e8e8ea;
+                --surface: #d8d8da;
+                --surface2: #c8c8ca;
+                --accent: #7c3aed;
+                --accent2: #06b6d4;
+                --text: #1a1a2e;
+                --text2: #6a6a7a;
+                --card-bg: #f5f5f7;
+                --white: #ffffff;
+                --pastel-pink: #e8a0bf;
+                --pastel-pink-light: #f2c4d8;
+            }
+
+            html {
+                scroll-behavior: smooth;
+            }
+
+            body {
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                background: var(--bg);
+                color: var(--text);
+                overflow-x: hidden;
+                line-height: 1.6;
+            }
+
+            ::-webkit-scrollbar {
+                width: 6px;
+            }
+            ::-webkit-scrollbar-track {
+                background: var(--bg);
+            }
+            ::-webkit-scrollbar-thumb {
+                background: var(--accent);
+                border-radius: 3px;
+            }
+
+            /* NAV */
+            nav {
+                position: fixed;
+                top: 16px;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 0 36px;
+                height: 56px;
+                background: rgba(255, 255, 255, 0.7);
+                backdrop-filter: blur(24px);
+                border: 1px solid rgba(0, 0, 0, 0.06);
+                border-radius: 40px;
+                width: calc(100% - 60px);
+                max-width: 1200px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            }
+
+            .nav-logo-img {
+                height: 34px;
+                width: auto;
+                display: block;
+            }
+
+            .nav-right {
+                display: flex;
+                align-items: center;
+                gap: 24px;
+            }
+
+            .nav-links {
+                display: flex;
+                gap: 28px;
+                list-style: none;
+            }
+
+            .nav-links li a {
+                color: var(--text2);
+                text-decoration: none;
+                font-size: 0.78rem;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                transition:
+                    color 0.3s,
+                    opacity 0.3s;
+                cursor: pointer;
+                opacity: 0.55;
+            }
+
+            .nav-links li a:hover {
+                color: var(--pastel-pink);
+                opacity: 1;
+            }
+
+            .lang-switch {
+                display: flex;
+                overflow: hidden;
+                border: 1.5px solid var(--pastel-pink);
+            }
+
+            .lang-btn {
+                padding: 5px 12px;
+                font-size: 0.72rem;
+                font-weight: 700;
+                border: none;
+                cursor: pointer;
+                background: transparent;
+                color: var(--pastel-pink);
+                transition: all 0.3s;
+                letter-spacing: 1px;
+            }
+
+            .lang-btn.active {
+                background: var(--pastel-pink);
+                color: #fff;
+            }
+
+            .nav-divider {
+                width: 1px;
+                height: 24px;
+                background: rgba(0, 0, 0, 0.12);
+            }
+
+            .social-icons {
+                display: flex;
+                gap: 14px;
+                align-items: center;
+            }
+
+            .social-icons a {
+                color: var(--text2);
+                transition: color 0.3s;
+                display: flex;
+                align-items: center;
+                opacity: 0.55;
+            }
+
+            .social-icons a:hover {
+                color: var(--pastel-pink);
+                opacity: 1;
+            }
+            .social-icons svg {
+                width: 16px;
+                height: 16px;
+                fill: currentColor;
+            }
+
+            /* Hamburger */
+            .hamburger {
+                display: none;
+                background: none;
+                border: none;
+                cursor: pointer;
+                padding: 8px;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .hamburger span {
+                display: block;
+                width: 20px;
+                height: 2px;
+                background: var(--text2);
+                transition: all 0.3s;
+                border-radius: 2px;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(4px, 4px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(4px, -4px);
+            }
+
+            .mobile-dropdown {
+                display: none;
+                position: absolute;
+                top: 64px;
+                right: 0;
+                background: rgba(255, 255, 255, 0.97);
+                backdrop-filter: blur(20px);
+                border-radius: 16px;
+                padding: 16px 0;
+                min-width: 180px;
+                box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+                border: 1px solid rgba(0, 0, 0, 0.06);
+                z-index: 10;
+            }
+
+            .mobile-dropdown.active {
+                display: block;
+            }
+
+            .mobile-dropdown ul {
+                list-style: none;
+                padding: 0 16px;
+            }
+
+            .mobile-dropdown ul li {
+                padding: 10px 0;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+            }
+
+            .mobile-dropdown ul li:last-child {
+                border-bottom: none;
+            }
+
+            .mobile-dropdown ul li a {
+                color: var(--text2);
+                text-decoration: none;
+                font-size: 0.85rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                transition: color 0.3s;
+            }
+
+            .mobile-dropdown ul li a:hover {
+                color: var(--pastel-pink);
+            }
+
+            /* HERO */
+            .hero {
+                min-height: 100vh;
+                padding: 80px 20px 20px;
+                display: flex;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .hero-wrapper {
+                flex: 1;
+                border-radius: 24px;
+                overflow: hidden;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                position: relative;
+            }
+
+            .hero-left {
+                background: var(--surface);
+            }
+
+            .hero-left img {
+                max-width: 400px;
+                width: 85%;
+                filter: drop-shadow(0 0 40px rgba(124, 58, 237, 0.15));
+            }
+
+            .hero-right {
+                background: #000;
+                position: relative;
+                overflow: hidden;
+            }
+
+            .hero-video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                position: absolute;
+                inset: 0;
+                display: block;
+                background: #000;
+            }
+
+            .showreel-label {
+                position: absolute;
+                bottom: 24px;
+                right: 28px;
+                font-size: 0.85rem;
+                font-weight: 600;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: #fff;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+                z-index: 2;
+                opacity: 0.8;
+            }
+
+            /* SCROLL TEXT */
+            .scroll-text-section {
+                padding: 80px 0;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .scroll-text-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 20px;
+                right: 20px;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--pastel-pink),
+                    transparent
+                );
+            }
+
+            .scroll-row {
+                display: flex;
+                gap: 60px;
+                white-space: nowrap;
+                will-change: transform;
+            }
+
+            .scroll-word {
+                font-size: clamp(2.8rem, 7vw, 6rem);
+                font-weight: 800;
+                letter-spacing: -2px;
+                color: var(--text);
+                opacity: 0.12;
+                flex-shrink: 0;
+                transition:
+                    color 0.3s,
+                    opacity 0.3s;
+                cursor: default;
+            }
+
+            .scroll-word:hover {
+                color: var(--pastel-pink);
+                opacity: 0.6;
+            }
+
+            .scroll-dot {
+                font-size: clamp(1.8rem, 4vw, 4rem);
+                color: var(--pastel-pink);
+                align-self: center;
+                flex-shrink: 0;
+                opacity: 0.2;
+            }
+
+            /* ABOUT PANEL */
+            .about-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 2000;
+                background: rgba(232, 232, 234, 0.97);
+                backdrop-filter: blur(30px);
+                display: flex;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .about-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .about-panel {
+                width: 100%;
+                margin: auto;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                overflow-y: auto;
+                transform: translateY(30px);
+                transition: transform 0.5s;
+            }
+
+            .about-overlay.active .about-panel {
+                transform: translateY(0);
+            }
+
+            .about-banner-wrap {
+                position: relative;
+                width: 100%;
+            }
+
+            .about-banner {
+                width: 100%;
+                max-height: 400px;
+                object-fit: cover;
+                display: block;
+            }
+
+            .about-banner-text {
+                position: absolute;
+                bottom: 24px;
+                left: 32px;
+                z-index: 2;
+            }
+
+            .about-banner-text .about-subtitle {
+                font-size: 0.75rem;
+                text-transform: uppercase;
+                letter-spacing: 3px;
+                color: var(--pastel-pink);
+                font-weight: 700;
+                margin-bottom: 4px;
+                text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3);
+            }
+
+            .about-banner-text .about-title {
+                font-size: clamp(1.8rem, 4vw, 3rem);
+                font-weight: 800;
+                letter-spacing: -1px;
+                color: #fff;
+                text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+            }
+
+            .about-close {
+                position: absolute;
+                top: 20px;
+                right: 40px;
+                background: rgba(0, 0, 0, 0.4);
+                border: none;
+                color: #fff;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: background 0.3s;
+                z-index: 10;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .about-close:hover {
+                background: rgba(0, 0, 0, 0.6);
+            }
+
+            .about-content-wrap {
+                padding: 40px 32px;
+                max-width: 700px;
+                text-align: left;
+            }
+
+            .about-desc {
+                color: var(--text2);
+                font-size: 1.05rem;
+                line-height: 1.8;
+                margin-bottom: 14px;
+                text-align: left;
+            }
+
+            .about-desc-small {
+                color: var(--text2);
+                font-size: 0.9rem;
+                opacity: 0.6;
+                margin-bottom: 28px;
+                text-align: left;
+                line-height: 1.7;
+            }
+
+            .about-meta {
+                display: flex;
+                gap: 40px;
+                margin-bottom: 28px;
+                flex-wrap: wrap;
+            }
+
+            .about-meta-item {
+                text-align: left;
+            }
+
+            .about-meta-item span {
+                display: block;
+                font-size: 0.7rem;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                color: var(--text2);
+                opacity: 0.6;
+                margin-bottom: 4px;
+            }
+
+            .about-meta-item strong {
+                font-size: 1rem;
+                color: var(--text);
+            }
+
+            .about-specialties {
+                display: flex;
+                gap: 10px;
+                flex-wrap: wrap;
+                margin-bottom: 32px;
+            }
+
+            .about-specialties span {
+                padding: 7px 16px;
+                border-radius: 20px;
+                background: var(--surface2);
+                border: 1px solid rgba(124, 58, 237, 0.12);
+                font-size: 0.8rem;
+                font-weight: 600;
+                color: var(--text2);
+            }
+
+            .about-cta {
+                padding: 14px 40px;
+                background: var(--pastel-pink);
+                border: none;
+                border-radius: 30px;
+                color: #fff;
+                font-size: 1rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.3s,
+                    box-shadow 0.3s;
+                letter-spacing: 0.5px;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            .about-cta:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 10px 30px rgba(232, 160, 191, 0.4);
+            }
+
+            /* GALLERY */
+            .gallery-section {
+                padding: 60px 20px 80px;
+                position: relative;
+            }
+
+            .gallery-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 20px;
+                right: 20px;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--pastel-pink),
+                    transparent
+                );
+            }
+
+            .gallery-header {
+                margin-bottom: 40px;
+                margin-left: 10px;
+                padding: 0 0 20px 0;
+                text-align: left;
+            }
+
+            .gallery-header h2 {
+                font-size: clamp(2rem, 4vw, 3.5rem);
+                font-weight: 800;
+                letter-spacing: -1px;
+                color: var(--text);
+            }
+
+            .gallery-header p {
+                color: var(--text2);
+                font-size: 1rem;
+                max-width: 500px;
+            }
+
+            .gallery-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 12px;
+            }
+
+            .gallery-item {
+                position: relative;
+                overflow: hidden;
+                cursor: pointer;
+                border-radius: 12px;
+                background: var(--surface);
+            }
+
+            .gallery-item-wide {
+                grid-column: 1 / -1;
+                aspect-ratio: 3/1.255;
+            }
+
+            .gallery-item img,
+            .gallery-item video {
+                width: 100%;
+                height: 100%;
+                display: block;
+                transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .gallery-item img {
+                object-fit: cover;
+            }
+
+            .gallery-item video {
+                object-fit: contain;
+                background: #000;
+                transform: none !important;
+            }
+
+            .gallery-item:hover img {
+                transform: scale(1.08);
+            }
+
+            .gallery-item:hover video {
+                transform: none !important;
+            }
+
+            .gallery-item-overlay {
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(
+                    to top,
+                    rgba(26, 26, 46, 0.85) 0%,
+                    transparent 60%
+                );
+                opacity: 0;
+                transition: opacity 0.4s;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 24px;
+            }
+
+            .gallery-item:hover .gallery-item-overlay {
+                opacity: 1;
+            }
+
+            .gallery-item-number {
+                font-size: 0.7rem;
+                font-weight: 800;
+                color: var(--pastel-pink);
+                letter-spacing: 2px;
+                margin-bottom: 4px;
+            }
+
+            .gallery-item-title {
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: #fff;
+                margin-bottom: 4px;
+            }
+
+            .gallery-item-desc {
+                font-size: 0.8rem;
+                color: rgba(255, 255, 255, 0.7);
+            }
+
+            .gallery-item-corner {
+                position: absolute;
+                top: 12px;
+                right: 12px;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                background: rgba(232, 160, 191, 0.6);
+                backdrop-filter: blur(8px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                opacity: 0;
+                transform: scale(0.8);
+                transition: all 0.4s;
+            }
+
+            .gallery-item:hover .gallery-item-corner {
+                opacity: 1;
+                transform: scale(1);
+            }
+            .gallery-item-corner svg {
+                width: 16px;
+                height: 16px;
+                fill: #fff;
+            }
+
+            /* FULLSCREEN OVERLAY */
+            .fullscreen-overlay {
+                position: fixed;
+                inset: 0;
+                z-index: 4000;
+                background: rgba(26, 26, 46, 0.95);
+                display: none;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+            }
+
+            .fullscreen-overlay.active {
+                display: flex;
+            }
+
+            .fullscreen-media {
+                max-width: 95vw;
+                max-height: 85vh;
+                width: 95vw;
+                height: 85vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .fullscreen-media img,
+            .fullscreen-media video {
+                max-width: 100%;
+                max-height: 100%;
+                object-fit: contain;
+                border-radius: 8px;
+                display: block;
+                background: #000;
+            }
+
+            .fullscreen-exit {
+                margin-top: 20px;
+                padding: 12px 32px;
+                background: var(--pastel-pink);
+                border: none;
+                border-radius: 25px;
+                color: #fff;
+                font-size: 0.95rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            .fullscreen-exit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(232, 160, 191, 0.4);
+            }
+
+            /* PROJECT SIDEBAR */
+            .project-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 3000;
+                width: 550px;
+                max-width: 100vw;
+                background: var(--card-bg);
+                transform: translateX(-100%);
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
+            }
+
+            .project-sidebar.active {
+                transform: translateX(0);
+            }
+
+            .project-backdrop {
+                position: fixed;
+                inset: 0;
+                z-index: 2999;
+                background: rgba(232, 232, 234, 0.6);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+
+            .project-backdrop.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .project-close {
+                position: absolute;
+                top: 16px;
+                right: 16px;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.1);
+                border: none;
+                color: var(--text);
+                font-size: 1.5rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.3s;
+                z-index: 10;
+            }
+
+            .project-close:hover {
+                background: rgba(0, 0, 0, 0.15);
+            }
+
+            .project-number {
+                padding: 24px 24px 0;
+                font-size: 0.75rem;
+                font-weight: 800;
+                color: var(--pastel-pink);
+                letter-spacing: 3px;
+            }
+
+            .project-media {
+                position: relative;
+                margin: 16px 24px;
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            .project-media img,
+            .project-media video {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+
+            .project-media img {
+                object-fit: cover;
+            }
+
+            .project-media video {
+                object-fit: contain;
+                background: #000;
+            }
+
+            .project-fullscreen {
+                position: absolute;
+                bottom: 10px;
+                right: 10px;
+                width: 34px;
+                height: 34px;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.8);
+                backdrop-filter: blur(6px);
+                border: none;
+                color: var(--text);
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s;
+            }
+
+            .project-fullscreen:hover {
+                background: #fff;
+            }
+            .project-fullscreen svg {
+                width: 16px;
+                height: 16px;
+                fill: var(--text);
+            }
+
+            .project-info {
+                padding: 24px;
+            }
+
+            .project-info h3 {
+                font-size: 1.6rem;
+                font-weight: 800;
+                margin-bottom: 10px;
+                color: var(--text);
+                letter-spacing: -0.5px;
+            }
+
+            .project-info p {
+                color: var(--text2);
+                font-size: 0.9rem;
+                line-height: 1.7;
+                margin-bottom: 20px;
+            }
+
+            .project-specs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+
+            .spec-item {
+                padding: 10px 14px;
+                background: var(--surface);
+                border-radius: 8px;
+            }
+
+            .spec-item label {
+                display: block;
+                font-size: 0.65rem;
+                text-transform: uppercase;
+                letter-spacing: 1.5px;
+                color: var(--text2);
+                opacity: 0.6;
+                margin-bottom: 3px;
+            }
+
+            .spec-item span {
+                font-size: 0.85rem;
+                font-weight: 600;
+                color: var(--text);
+            }
+
+            .project-contact-panel {
+                padding: 24px;
+                background: linear-gradient(
+                    135deg,
+                    rgba(232, 160, 191, 0.12),
+                    rgba(232, 160, 191, 0.04)
+                );
+                border-radius: 12px;
+                margin: 0 24px 24px;
+                text-align: center;
+            }
+
+            .project-contact-panel h4 {
+                font-size: 1rem;
+                font-weight: 700;
+                margin-bottom: 4px;
+                color: var(--text);
+            }
+
+            .project-contact-panel p {
+                color: var(--text2);
+                font-size: 0.85rem;
+                margin-bottom: 14px;
+            }
+
+            .project-contact-btn {
+                display: inline-block;
+                padding: 12px 28px;
+                background: var(--pastel-pink);
+                color: #fff;
+                border: none;
+                border-radius: 25px;
+                font-weight: 700;
+                font-size: 0.85rem;
+                cursor: pointer;
+                transition: all 0.3s;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            .project-contact-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(232, 160, 191, 0.35);
+            }
+
+            /* CONTACT SECTION */
+            .contact-section {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                position: relative;
+                overflow: hidden;
+                padding: 80px 20px;
+            }
+
+            .contact-section::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 20px;
+                right: 20px;
+                height: 1px;
+                background: linear-gradient(
+                    90deg,
+                    transparent,
+                    var(--pastel-pink),
+                    transparent
+                );
+            }
+
+            .contact-bg {
+                position: absolute;
+                inset: 0;
+                background: radial-gradient(
+                    ellipse at center,
+                    rgba(232, 160, 191, 0.06) 0%,
+                    transparent 70%
+                );
+            }
+
+            .contact-content {
+                position: relative;
+                z-index: 1;
+                text-align: center;
+            }
+
+            .contact-content h2 {
+                font-size: clamp(2.5rem, 6vw, 4.5rem);
+                font-weight: 800;
+                letter-spacing: -2px;
+                margin-bottom: 20px;
+                color: var(--text);
+            }
+
+            .contact-btn {
+                position: relative;
+                display: inline-block;
+                padding: 20px 60px;
+                font-size: 1.1rem;
+                font-weight: 700;
+                color: var(--pastel-pink);
+                border: 2px solid var(--pastel-pink);
+                border-radius: 50px;
+                cursor: pointer;
+                overflow: hidden;
+                transition: color 0.4s;
+                background: transparent;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            }
+
+            .contact-btn .btn-fill {
+                position: absolute;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                width: 0;
+                background: var(--pastel-pink);
+                transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                border-radius: 50px;
+                z-index: -1;
+            }
+
+            .contact-btn:hover .btn-fill {
+                width: 100%;
+            }
+            .contact-btn:hover {
+                color: #fff;
+            }
+            .contact-btn span {
+                position: relative;
+                z-index: 1;
+            }
+
+            /* FORM SIDEBAR */
+            .form-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 3000;
+                width: 550px;
+                max-width: 100vw;
+                background: var(--card-bg);
+                transform: translateX(-100%);
+                transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+                box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
+            }
+
+            .form-sidebar.active {
+                transform: translateX(0);
+            }
+
+            .form-backdrop {
+                position: fixed;
+                inset: 0;
+                z-index: 2999;
+                background: rgba(232, 232, 234, 0.6);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s;
+            }
+
+            .form-backdrop.active {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .form-header {
+                padding: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            }
+
+            .form-header h3 {
+                font-size: 1.4rem;
+                font-weight: 800;
+                color: var(--text);
+            }
+
+            .form-close {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: rgba(0, 0, 0, 0.1);
+                border: none;
+                color: var(--text);
+                font-size: 1.3rem;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: background 0.3s;
+            }
+
+            .form-close:hover {
+                background: rgba(0, 0, 0, 0.15);
+            }
+
+            .form-body {
+                padding: 24px;
+            }
+
+            .form-group {
+                margin-bottom: 18px;
+            }
+
+            .form-group label {
+                display: block;
+                font-size: 0.75rem;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                color: var(--text2);
+                margin-bottom: 6px;
+            }
+
+            .form-group input,
+            .form-group select {
+                width: 100%;
+                padding: 11px 14px;
+                background: var(--surface);
+                border: 1px solid rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                color: var(--text);
+                font-size: 0.9rem;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                outline: none;
+                transition: border-color 0.3s;
+            }
+
+            .form-group input:focus,
+            .form-group select:focus {
+                border-color: var(--pastel-pink);
+            }
+            .form-group select {
+                cursor: pointer;
+            }
+            .form-group select option {
+                background: var(--card-bg);
+            }
+
+            .plan-selector {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .plan-card {
+                padding: 14px 10px;
+                background: var(--surface);
+                border: 2px solid transparent;
+                border-radius: 8px;
+                cursor: pointer;
+                text-align: center;
+                transition: all 0.3s;
+            }
+
+            .plan-card:hover,
+            .plan-card.selected {
+                border-color: var(--pastel-pink);
+                background: rgba(232, 160, 191, 0.08);
+            }
+
+            .plan-card h5 {
+                font-size: 0.8rem;
+                font-weight: 700;
+                margin-bottom: 6px;
+                color: var(--pastel-pink);
+            }
+
+            .plan-card p {
+                font-size: 0.65rem;
+                color: var(--text2);
+                line-height: 1.5;
+            }
+
+            .form-submit {
+                width: 100%;
+                padding: 14px;
+                background: var(--pastel-pink);
+                border: none;
+                border-radius: 8px;
+                color: #fff;
+                font-size: 0.95rem;
+                font-weight: 700;
+                cursor: pointer;
+                transition:
+                    transform 0.3s,
+                    box-shadow 0.3s;
+                font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                letter-spacing: 0.5px;
+            }
+
+            .form-submit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(232, 160, 191, 0.4);
+            }
+
+            /* FOOTER */
+            footer {
+                padding: 32px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 24px;
+                flex-wrap: wrap;
+                border-top: 1px solid rgba(0, 0, 0, 0.06);
+            }
+
+            footer p {
+                color: var(--text2);
+                font-size: 0.8rem;
+            }
+
+            footer a {
+                color: var(--pastel-pink);
+                text-decoration: none;
+                transition: color 0.3s;
+                font-size: 0.8rem;
+            }
+
+            footer a:hover {
+                color: var(--text2);
+            }
+
+            /* MOBILE */
+            @media (max-width: 900px) {
+                nav {
+                    top: 12px;
+                    left: 12px;
+                    right: 12px;
+                    width: auto;
+                    transform: none;
+                    padding: 0 20px;
+                    height: 52px;
+                    border-radius: 28px;
+                }
+
+                .hamburger {
+                    display: flex;
+                }
+
+                .nav-links,
+                .nav-divider,
+                .social-icons {
+                    display: none;
+                }
+
+                .mobile-dropdown {
+                    position: fixed;
+                    top: 72px;
+                    right: 12px;
+                    left: 12px;
+                    width: auto;
+                    border-radius: 16px;
+                    padding: 12px 0;
+                }
+
+                .hero {
+                    flex-direction: column;
+                    padding-top: 76px;
+                    gap: 12px;
+                }
+                .hero-wrapper {
+                    border-radius: 18px;
+                    min-height: 40vh;
+                }
+                .hero-left img {
+                    max-width: 200px;
+                }
+                .hero-right {
+                    min-height: 45vh;
+                }
+                .gallery-grid {
+                    grid-template-columns: 1fr;
+                    gap: 10px;
+                }
+                .gallery-media,
+                .project-media-item {
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                }
+                .gallery-item video,
+                .project-media video {
+                    object-fit: cover;
+                    background: #000;
+                }
+                .gallery-item-wide {
+                    aspect-ratio: 16/9;
+                }
+                .project-sidebar,
+                .form-sidebar {
+                    width: 100vw;
+                }
+                .project-specs {
+                    grid-template-columns: 1fr;
+                }
+                .plan-selector {
+                    grid-template-columns: 1fr;
+                }
+                footer {
+                    flex-direction: column;
+                    gap: 10px;
+                }
+                .about-banner-text {
+                    bottom: 16px;
+                    left: 20px;
+                }
+                .about-banner-text .about-title {
+                    font-size: 1.6rem;
+                }
+                .about-content-wrap {
+                    padding: 28px 20px;
+                }
+            }
+
+            @media (min-width: 901px) and (max-width: 1100px) {
+                .hero-left img {
+                    max-width: 280px;
+                }
+            }
+
+            .fade-in {
+                opacity: 0;
+                transform: translateY(20px);
+                transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+
+            .fade-in.visible {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+    <body>
+        <!-- NAV -->
+        <nav id="navbar">
+            <div class="nav-logo" onclick="scrollToTop()">
+                <img
+                    src="Images/LogitoIDREAM-06.png"
+                    alt="iDream Logo"
+                    class="nav-logo-img"
+                />
+            </div>
+            <div class="nav-right">
+                <ul class="nav-links">
+                    <li>
+                        <a href="#gallery" data-en="Work" data-es="Trabajo"
+                            >Work</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onclick="openAbout(event)"
+                            data-en="Us"
+                            data-es="Nosotros"
+                            >Us</a
+                        >
+                    </li>
+                    <li>
+                        <a href="#contact" data-en="Contact" data-es="Contacto"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+                <div class="lang-switch">
+                    <button class="lang-btn active" onclick="setLang('en')">
+                        ENG
+                    </button>
+                    <button class="lang-btn" onclick="setLang('es')">
+                        ESP
+                    </button>
+                </div>
+                <div class="nav-divider"></div>
+                <div class="social-icons">
+                    <a
+                        href="https://www.instagram.com/idream_animationstudio"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                    >
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                            />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Behance">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"
+                            />
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24">
+                            <path
+                                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667h-3.554v-11.452h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zm-15.11-13.019c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019h-3.564v-11.452h3.564v11.452zm15.106-20.452h-20.454c-.979 0-1.771.774-1.771 1.729v20.542c0 .956.792 1.729 1.771 1.729h20.451c.978 0 1.778-.773 1.778-1.729v-20.542c0-.955-.8-1.729-1.778-1.729z"
+                            />
+                        </svg>
+                    </a>
+                </div>
+                <button
+                    class="hamburger"
+                    id="hamburgerBtn"
+                    onclick="toggleMobileMenu()"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+            <div class="mobile-dropdown" id="mobileDropdown">
+                <ul>
+                    <li>
+                        <a
+                            href="#gallery"
+                            onclick="toggleMobileMenu()"
+                            data-en="Work"
+                            data-es="Trabajo"
+                            >Work</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#"
+                            onclick="
+                                openAbout(event);
+                                toggleMobileMenu();
+                            "
+                            data-en="Us"
+                            data-es="Nosotros"
+                            >Us</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="#contact"
+                            onclick="toggleMobileMenu()"
+                            data-en="Contact"
+                            data-es="Contacto"
+                            >Contact</a
+                        >
+                    </li>
+                </ul>
+                <div style="padding: 0 16px; margin-top: 8px">
+                    <div
+                        class="lang-switch"
+                        style="width: 100%; justify-content: center"
+                    >
+                        <button class="lang-btn active" onclick="setLang('en')">
+                            ENG
+                        </button>
+                        <button class="lang-btn" onclick="setLang('es')">
+                            ESP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- ABOUT OVERLAY -->
+        <div class="about-overlay" id="aboutOverlay">
+            <div class="about-panel">
+                <div class="about-banner-wrap">
+                    <img
+                        class="about-banner"
+                        src="https://image.qwenlm.ai/public_source/52748c71-8fd7-4636-ae3f-a4252d9e428f/1626536c3-d1d9-4317-a6ed-b82f06a20993.png"
+                        alt="About Us"
+                    />
+                    <div class="about-banner-text">
+                        <p
+                            class="about-subtitle"
+                            data-en="About Us"
+                            data-es="Sobre Nosotros"
+                        >
+                            About Us
+                        </p>
+                        <h2 class="about-title">iDream Studio</h2>
+                    </div>
+                </div>
+                <button class="about-close" onclick="closeAbout()">
+                    &times;
+                </button>
+                <div class="about-content-wrap">
+                    <p
+                        class="about-desc"
+                        data-en="We are an animation and motion design studio passionate about transforming ideas into visual experiences. We combine storytelling, technique, and aesthetics to create pieces that resonate with audiences and elevate brands."
+                        data-es="Somos un estudio de animación y motion design apasionado por transformar ideas en experiencias visuales. Combinamos narrativa, técnica y estética para crear piezas que resuenan con las audiencias y elevan las marcas."
+                    >
+                        We are an animation and motion design studio passionate
+                        about transforming ideas into visual experiences. We
+                        combine storytelling, technique, and aesthetics to
+                        create pieces that resonate with audiences and elevate
+                        brands.
+                    </p>
+                    <p
+                        class="about-desc-small"
+                        data-en="From motion branding to complex 3D animations, every project is an opportunity to dream big and execute with precision."
+                        data-es="Desde motion branding hasta complejas animaciones 3D, cada proyecto es una oportunidad para soñar en grande y ejecutar con precisión."
+                    >
+                        From motion branding to complex 3D animations, every
+                        project is an opportunity to dream big and execute with
+                        precision.
+                    </p>
+                    <div class="about-meta">
+                        <div class="about-meta-item">
+                            <span data-en="Founded" data-es="Fundado"
+                                >Founded</span
+                            ><strong>2025</strong>
+                        </div>
+                        <div class="about-meta-item">
+                            <span data-en="Location" data-es="Ubicación"
+                                >Location</span
+                            ><strong>Medellín, Colombia</strong>
+                        </div>
+                    </div>
+                    <div class="about-specialties">
+                        <span>Motion Design</span><span>3D Animation</span
+                        ><span>Visual Branding</span><span>Direction</span>
+                    </div>
+                    <button
+                        class="about-cta"
+                        onclick="
+                            closeAbout();
+                            document
+                                .getElementById('contact')
+                                .scrollIntoView({ behavior: 'smooth' });
+                        "
+                        data-en="Let's Talk"
+                        data-es="Hablemos"
+                    >
+                        Let's Talk
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="hero-wrapper hero-left">
+                <img src="Images/LogitoIDREAM-10.png" alt="iDream Studio" />
+            </div>
+            <div class="hero-wrapper hero-right">
+                <video
+                    class="hero-video"
+                    id="heroShowreel"
+                    autoplay
+                    muted
+                    playsinline
+                >
+                    <source
+                        src="Images/composicionfuego.mp4"
+                        type="video/mp4"
+                    />
+                </video>
+                <div class="showreel-label">Showreel 2026</div>
+            </div>
+        </section>
+
+        <!-- SCROLL TEXT -->
+        <section class="scroll-text-section" id="scrollTextSection">
+            <div class="scroll-row" id="scrollRow1">
+                <span class="scroll-word">3D</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">DESIGN</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">ANIMATION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">MOTION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">BRANDING</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">3D</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">DESIGN</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">ANIMATION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">MOTION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">BRANDING</span
+                ><span class="scroll-dot">·</span>
+            </div>
+            <div class="scroll-row" id="scrollRow2">
+                <span class="scroll-word">MOTION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">VISUAL</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">STORYTELLING</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">CREATIVE</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">DIRECTION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">MOTION</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">VISUAL</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">STORYTELLING</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">CREATIVE</span
+                ><span class="scroll-dot">·</span>
+                <span class="scroll-word">DIRECTION</span
+                ><span class="scroll-dot">·</span>
+            </div>
+        </section>
+
+        <!-- GALLERY -->
+        <section class="gallery-section" id="gallery">
+            <div class="gallery-header fade-in">
+                <h2 data-en="Visual Lab" data-es="Laboratorio Visual">
+                    Selected Work
+                </h2>
+                <p
+                    data-en="Experimental projects in visualization, design and 3D storytelling."
+                    data-es="Proyectos experimentales de visualización, diseño y narrativa 3D."
+                >
+                    Explore our latest projects and creative endeavors
+                </p>
+            </div>
+            <div class="gallery-grid" id="galleryGrid"></div>
+        </section>
+
+        <!-- FULLSCREEN OVERLAY -->
+        <div class="fullscreen-overlay" id="fullscreenOverlay">
+            <div class="fullscreen-media" id="fullscreenMedia"></div>
+            <button
+                class="fullscreen-exit"
+                onclick="closeFullscreen()"
+                data-en="Exit Fullscreen"
+                data-es="Salir de Pantalla Completa"
+            >
+                Exit Fullscreen
+            </button>
+        </div>
+
+        <!-- PROJECT SIDEBAR -->
+        <div
+            class="project-backdrop"
+            id="projectBackdrop"
+            onclick="closeProject()"
+        ></div>
+        <div class="project-sidebar" id="projectSidebar">
+            <button class="project-close" onclick="closeProject()">
+                &times;
+            </button>
+            <div id="projectContent"></div>
+        </div>
+
+        <!-- CONTACT -->
+        <section class="contact-section" id="contact">
+            <div class="contact-bg"></div>
+            <div class="contact-content fade-in">
+                <h2
+                    data-en="Ready to collaborate?"
+                    data-es="¿Listo para colaborar?"
+                >
+                    Ready to collaborate?
+                </h2>
+                <button class="contact-btn" onclick="openForm()">
+                    <div class="btn-fill"></div>
+                    <span data-en="Start a Project" data-es="Iniciar Proyecto"
+                        >Start a Project</span
+                    >
+                </button>
+            </div>
+        </section>
+
+        <!-- FORM SIDEBAR -->
+        <div
+            class="form-backdrop"
+            id="formBackdrop"
+            onclick="closeForm()"
+        ></div>
+        <div class="form-sidebar" id="formSidebar">
+            <div class="form-header">
+                <h3 data-en="New Project" data-es="Nuevo Proyecto">
+                    New Project
+                </h3>
+                <button class="form-close" onclick="closeForm()">
+                    &times;
+                </button>
+            </div>
+            <div class="form-body">
+                <div class="form-group">
+                    <label data-en="Client Name" data-es="Nombre del Cliente"
+                        >Client Name</label
+                    >
+                    <input type="text" id="clientName" />
+                </div>
+                <div class="form-group">
+                    <label data-en="Project Name" data-es="Nombre del Proyecto"
+                        >Project Name</label
+                    >
+                    <input type="text" id="projectName" />
+                </div>
+                <div class="form-group">
+                    <label
+                        data-en="Approximate Duration"
+                        data-es="Duración Aproximada"
+                        >Approximate Duration</label
+                    >
+                    <select id="approxDuration">
+                        <option value="short">&lt; 30s</option>
+                        <option value="medium">30-60s</option>
+                        <option value="long">1-3min</option>
+                        <option value="xl">3min+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-en="Category" data-es="Categoría"
+                        >Category</label
+                    >
+                    <select id="category">
+                        <option
+                            value="motion"
+                            data-en="Motion Design"
+                            data-es="Motion Design"
+                        >
+                            Motion Design
+                        </option>
+                        <option
+                            value="3d"
+                            data-en="3D Animation"
+                            data-es="Animación 3D"
+                        >
+                            3D Animation
+                        </option>
+                        <option
+                            value="branding"
+                            data-en="Visual Branding"
+                            data-es="Branding Visual"
+                        >
+                            Visual Branding
+                        </option>
+                        <option
+                            value="direction"
+                            data-en="Direction"
+                            data-es="Dirección"
+                        >
+                            Direction
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label data-en="Style" data-es="Estilo">Style</label>
+                    <select id="style">
+                        <option
+                            value="abstract"
+                            data-en="Abstract"
+                            data-es="Abstracto"
+                        >
+                            Abstract
+                        </option>
+                        <option
+                            value="minimal"
+                            data-en="Minimal"
+                            data-es="Minimalista"
+                        >
+                            Minimal
+                        </option>
+                        <option
+                            value="realistic"
+                            data-en="Realistic"
+                            data-es="Realista"
+                        >
+                            Realistic
+                        </option>
+                        <option
+                            value="stylized"
+                            data-en="Stylized"
+                            data-es="Estilizado"
+                        >
+                            Stylized
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label
+                        data-en="Number of Scenes"
+                        data-es="Número de Escenas"
+                        >Number of Scenes</label
+                    >
+                    <select id="scenes">
+                        <option value="1-3">1-3</option>
+                        <option value="4-7">4-7</option>
+                        <option value="8-12">8-12</option>
+                        <option value="12+">12+</option>
+                    </select>
+                </div>
+
+                <label
+                    style="
+                        display: block;
+                        font-size: 0.75rem;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        letter-spacing: 1px;
+                        color: var(--text2);
+                        margin-bottom: 10px;
+                    "
+                    data-en="Select Plan"
+                    data-es="Seleccionar Plan"
+                    >Select Plan</label
+                >
+                <div class="plan-selector">
+                    <div
+                        class="plan-card"
+                        onclick="selectPlan(this, 'standard')"
+                    >
+                        <h5 data-en="Standard" data-es="Estándar">Standard</h5>
+                        <p
+                            data-en="~30s · 3 scenes · No simulations · Basic lighting · Basic animation"
+                            data-es="~05s · 1 escena · Sin simulaciones · Iluminación básica · Animación básica"
+                        >
+                            ~30s · 3 scenes · No simulations · Basic lighting ·
+                            Basic animation
+                        </p>
+                    </div>
+                    <div class="plan-card" onclick="selectPlan(this, 'medium')">
+                        <h5 data-en="Medium" data-es="Medio">Medium</h5>
+                        <p
+                            data-en="~10s · 6 scenes · Simple simulations · Advanced lighting · 1 character"
+                            data-es="~10s · 1 escena · 1-3 Productos · Iluminación avanzada · 1 Personaje con animación básica"
+                        >
+                            ~60s · 6 scenes · Simple simulations · Advanced
+                            lighting · 1 character
+                        </p>
+                    </div>
+                    <div
+                        class="plan-card selected"
+                        onclick="selectPlan(this, 'premium')"
+                    >
+                        <h5 data-en="Premium" data-es="Premium">Premium</h5>
+                        <p
+                            data-en="~min · 12+ scenes · Complex simulations · Complex animation · Props & characters"
+                            data-es="~20s · 1-2 Escenas · Simulaciones · Animación · Props y personajes"
+                        >
+                            ~3min · 12+ scenes · Complex simulations · Complex
+                            animation · Props & characters
+                        </p>
+                    </div>
+                </div>
+
+                <button
+                    class="form-submit"
+                    onclick="submitForm()"
+                    data-en="Submit Project Request"
+                    data-es="Enviar Solicitud de Proyecto"
+                >
+                    Submit Project Request
+                </button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>© 2026 iDream — All rights reserved</p>
+            <a href="mailto:hello@idream.studio.com">hello@idream.studio.com</a>
+            <span
+                style="font-weight: 800; font-size: 1.1rem; color: var(--text)"
+                >iDream</span
+            >
+        </footer>
+
+        <script>
+            const projects = [
+                {
+                    num: "01",
+                    title: "Hada distopica (Luneth)",
+                    desc: "Diseño de personaje, Texturizado, Rigging",
+                    img: `<img class="gallery-media" src="images/hadaposes.png">`,
+                    extraMedia: "images/hadapose1.png",
+                    software: "Zbrush, Blender",
+                    duration: "60 horas",
+                    category: "Esculpido, Texturizado, Riggeado",
+                    year: "2025",
+                    fullDesc:
+                        "Exploración visual en 3D inspirada en fantasía postapocalíptica, combinando elementos naturales, diseño estilizado y narrativa ambiental.",
+                },
+                {
+                    num: "02",
+                    title: "Hatsu Sandia & Abahaca, Hatsu Frambuesa & Rosas",
+                    desc: "Renders 3D inspirados en la identidad visual de Hatsu y paisajes oníricos.",
+                    img: "images/hadaposes.png",
+                    extraMedia: "images/hadapose1.png",
+                    software: "Blender, Affinity",
+                    duration: "20 horas",
+                    client: "Aureum",
+                    category: "Renders de producto",
+                    year: "2026",
+                    fullDesc:
+                        "Proyecto de visualización 3D enfocado en crear una experiencia visual inmersiva alrededor de Hatsu, combinando renders estilizados, entornos surrealistas y narrativa audiovisual.",
+                },
+                {
+                    num: "03",
+                    title: "Salsa Ay María! Cienfuegos",
+                    desc: "Simulación de fuego, Composición",
+                    img: `<video class="gallery-media" autoplay muted loop playsinline>
+                    <source src="Images/composicionfuego.mp4" type="video/mp4">
+                    </video>`,
+                    software: "Blender, Affinity",
+                    duration: "30 horas",
+                    client: "Salsa Ay Maria!",
+                    category: "Animación, Composición, Simulación",
+                    year: "2026",
+                    fullDesc:
+                        "Render de producto con iluminación cinematográfica, fuego atmosférico y una estética visual intensa.",
+                },
+                {
+                    num: "04",
+                    title: "Comercial Hatsu",
+                    desc: "Visualización audiovisual para Hatsu con estética surrealista y cinematográfica.",
+                    img: `<video class="gallery-media" autoplay muted loop playsinline>
+                    <source src="Images/Hatsu 2K3.mp4" type="video/mp4">
+                    </video>`,
+                    software: "Blender, DaVinci",
+                    duration: "100 horas",
+                    client: "AI Labs",
+                    category: "Comercial bebida sodificada",
+                    year: "2026",
+                    fullDesc:
+                        "Proyecto audiovisual desarrollado para resaltar la identidad visual de Hatsu mediante entornos surrealistas, iluminación atmosférica y narrativa digital.",
+                },
+                {
+                    num: "05",
+                    title: "Audi R8 V10 PLus",
+                    desc: "Exploración visual inspirada en el Audi R8 V10 Plus.",
+                    img: `<video class="gallery-media" autoplay muted loop playsinline>
+                    <source src="Images/AudiFinal (2).mp4" type="video/mp4">
+                    </video>`,
+                    software: "Blender, DaVinci",
+                    duration: "40 horas",
+                    client: "Elysian",
+                    category: "Automotores",
+                    year: "2025",
+                    fullDesc:
+                        "Visualización inspirada en la potencia, velocidad y diseño del Audi R8 V10 Plus mediante iluminación cinematográfica y composición dinámica.",
+                },
+                /*
+                {
+                    num: "06",
+                    title: "Chromatic Bloom",
+                    desc: "Fluid dynamics with vivid colors",
+                    img: "https://image.qwenlm.ai/public_source/52748c71-8fd7-4636-ae3f-a4252d9e428f/105f72a09-84e3-4088-a3e8-7277a98350a7.png",
+                    software: "Houdini, Arnold",
+                    duration: "40s",
+                    client: "ColorFlow",
+                    category: "3D Animation",
+                    year: "2025",
+                    fullDesc:
+                        "An explosive fluid simulation featuring vibrant color mixing in zero gravity.",
+                },
+                {
+                    num: "07",
+                    title: "Future Object",
+                    desc: "Product visualization with studio lighting",
+                    img: "https://image.qwenlm.ai/public_source/52748c71-8fd7-4636-ae3f-a4252d9e428f/12c59dcbf-02f9-4203-83e9-d84633c351c3.png",
+                    software: "Cinema 4D, Octane",
+                    duration: "25s",
+                    client: "NovaTech",
+                    category: "3D Animation",
+                    year: "2024",
+                    fullDesc:
+                        "A sleek product visualization featuring photorealistic materials and dramatic lighting.",
+                },
+                {
+                    num: "08",
+                    title: "Pulse Network",
+                    desc: "Data visualization motion graphics",
+                    img: "https://image.qwenlm.ai/public_source/52748c71-8fd7-4636-ae3f-a4252d9e428f/160730cd4-d0dd-4834-a4d1-c0b7fb7f4215.png",
+                    software: "After Effects, Element 3D",
+                    duration: "55s",
+                    client: "DataViz Inc",
+                    category: "Motion Design",
+                    year: "2025",
+                    fullDesc:
+                        "An elegant data visualization with interconnected nodes and pulsing energy flows.",
+                },
+                {
+                    num: "09",
+                    title: "Brand Evolution",
+                    desc: "Animated brand story from concept to identity",
+                    img: "https://image.qwenlm.ai/public_source/52748c71-8fd7-4636-ae3f-a4252d9e428f/1be42f32c-36ec-4d79-87f4-58b653db9bf9.png",
+                    software: "After Effects, Illustrator",
+                    duration: "35s",
+                    client: "Rebrand Co",
+                    category: "Visual Branding",
+                    year: "2024",
+                    fullDesc:
+                        "A compelling brand evolution animation from concept sketches to final polished design.",
+                },
+                */
+            ];
+
+            const heroVideos = [
+                "Images/composicionfuego.mp4",
+                "Images/Hatsu 2K3.mp4",
+                "Images/AudiFinal (2).mp4",
+            ];
+
+            function getMediaValue(project) {
+                return project.media ?? project.img ?? "";
+            }
+
+            function isVideoMedia(media) {
+                if (!media) return false;
+                const value = String(media).trim();
+                return (
+                    /^<video[\s>]/i.test(value) ||
+                    /\.(mp4|webm|ogg)(\?|#|$)/i.test(value)
+                );
+            }
+
+            function extractMediaSrc(media) {
+                if (!media) return "";
+                const value = String(media).trim();
+
+                if (!value.startsWith("<")) {
+                    return value;
+                }
+
+                const match = value.match(/src\s*=\s*["']([^"']+)["']/i);
+                return match ? match[1] : "";
+            }
+
+            function renderMediaMarkup(
+                media,
+                title,
+                className,
+                withControls = false,
+            ) {
+                const value = getMediaValue({ media, img: media }).trim();
+
+                if (!value) {
+                    return "";
+                }
+
+                if (value.startsWith("<")) {
+                    return value;
+                }
+
+                if (isVideoMedia(value)) {
+                    return `<video class="${className}" autoplay muted loop playsinline${withControls ? " controls" : ""}>
+    <source src="${value}" type="video/mp4">
+</video>`;
+                }
+
+                return `<img class="${className}" src="${value}" alt="${title}" loading="lazy">`;
+            }
+
+            const grid = document.getElementById("galleryGrid");
+            projects.forEach((p, i) => {
+                const item = document.createElement("div");
+                item.className =
+                    "gallery-item" + (i === 3 ? " gallery-item-wide" : "");
+                item.onclick = () => openProject(i);
+                item.innerHTML = `
+                  ${renderMediaMarkup(p.media ?? p.img, p.title, "gallery-media")}
+      <div class="gallery-item-overlay">
+        <span class="gallery-item-number">${p.num}</span>
+        <h3 class="gallery-item-title">${p.title}</h3>
+        <p class="gallery-item-desc">${p.desc}</p>
+      </div>
+      <div class="gallery-item-corner">
+        <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      </div>
+    `;
+                grid.appendChild(item);
+            });
+
+            function openProject(idx) {
+                const p = projects[idx];
+                const content = document.getElementById("projectContent");
+                const projectMediaValue = (p.media ?? p.img ?? "").trim();
+                const extraMediaValue = (p.extraMedia ?? "").trim();
+                const projectMediaSrc = extractMediaSrc(projectMediaValue);
+                const projectMediaIsVideo = isVideoMedia(projectMediaValue);
+
+                content.innerHTML = `
+      <div class="project-number">PROJECT ${p.num}</div>
+      <div class="project-media">
+        ${renderMediaMarkup(projectMediaValue, p.title, "project-media-item", true)}
+        <button class="project-fullscreen" onclick='openFullscreen(${JSON.stringify(projectMediaSrc)}, ${JSON.stringify(p.title)}, ${projectMediaIsVideo})'>
+          <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+        </button>
+      </div>
+      ${
+          extraMediaValue
+              ? `
+            <div class="project-media">
+              ${renderMediaMarkup(extraMediaValue, p.title + " extra", "project-media-item", false)}
+              <button class="project-fullscreen" onclick='openFullscreen(${JSON.stringify(projectMediaSrc)}, ${JSON.stringify(p.title)}, ${projectMediaIsVideo})'>
+                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+              </button>
+            </div>
+          `
+              : ""
+      }
+      <div class="project-info">
+        <h3>${p.title}</h3>
+        <p>${p.fullDesc}</p>
+        <div class="project-specs">
+          <div class="spec-item"><label>Software</label><span>${p.software}</span></div>
+          <div class="spec-item"><label>Duración</label><span>${p.duration}</span></div>
+
+          <div class="spec-item"><label>Categoría</label><span>${p.category}</span></div>
+          <div class="spec-item"><label>Año</label><span>${p.year}</span></div>
+        </div>
+      </div>
+      <div class="project-contact-panel">
+        <h4 data-en="Interested in something similar?" data-es="¿Interesado en algo similar?">Interested in something similar?</h4>
+        <p data-en="Let's create your 3D Animation" data-es="Creemos tu Animación 3D">Let's create your 3D Animation</p>
+        <button class="project-contact-btn" onclick="closeProject();openForm()">Request a similar project →</button>
+      </div>
+    `;
+                document
+                    .getElementById("projectSidebar")
+                    .classList.add("active");
+                document
+                    .getElementById("projectBackdrop")
+                    .classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeProject() {
+                document
+                    .getElementById("projectSidebar")
+                    .classList.remove("active");
+                document
+                    .getElementById("projectBackdrop")
+                    .classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            function openFullscreen(mediaSrc, title, isVideo = false) {
+                const overlay = document.getElementById("fullscreenOverlay");
+                const media = document.getElementById("fullscreenMedia");
+
+                if (!mediaSrc) return;
+
+                media.innerHTML = isVideo
+                    ? `<video autoplay muted playsinline controls><source src="${mediaSrc}" type="video/mp4" /></video>`
+                    : `<img src="${mediaSrc}" alt="${title}" />`;
+
+                overlay.classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeFullscreen() {
+                document
+                    .getElementById("fullscreenOverlay")
+                    .classList.remove("active");
+                document.getElementById("fullscreenMedia").innerHTML = "";
+                if (
+                    !document
+                        .getElementById("projectSidebar")
+                        .classList.contains("active") &&
+                    !document
+                        .getElementById("formSidebar")
+                        .classList.contains("active") &&
+                    !document
+                        .getElementById("aboutOverlay")
+                        .classList.contains("active")
+                ) {
+                    document.body.style.overflow = "";
+                }
+            }
+
+            function openAbout(e) {
+                e.preventDefault();
+                document.getElementById("aboutOverlay").classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeAbout() {
+                document
+                    .getElementById("aboutOverlay")
+                    .classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            function openForm() {
+                document.getElementById("formSidebar").classList.add("active");
+                document.getElementById("formBackdrop").classList.add("active");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeForm() {
+                document
+                    .getElementById("formSidebar")
+                    .classList.remove("active");
+                document
+                    .getElementById("formBackdrop")
+                    .classList.remove("active");
+                document.body.style.overflow = "";
+            }
+
+            function selectPlan(el, plan) {
+                document
+                    .querySelectorAll(".plan-card")
+                    .forEach((c) => c.classList.remove("selected"));
+                el.classList.add("selected");
+            }
+
+            function submitForm() {
+                const name = document.getElementById("clientName").value;
+                const project = document.getElementById("projectName").value;
+                if (!name || !project) {
+                    alert(
+                        currentLang === "es"
+                            ? "Por favor completa los campos requeridos."
+                            : "Please fill in the required fields.",
+                    );
+                    return;
+                }
+                alert(
+                    currentLang === "es"
+                        ? "¡Proyecto enviado con éxito!"
+                        : "Project submitted successfully!",
+                );
+                closeForm();
+            }
+
+            let currentLang = "en";
+
+            function setLang(lang) {
+                currentLang = lang;
+                document.querySelectorAll(".lang-btn").forEach((btn) => {
+                    btn.classList.toggle(
+                        "active",
+                        btn.textContent.trim() ===
+                            (lang === "en" ? "ENG" : "ESP"),
+                    );
+                });
+                document.querySelectorAll("[data-en]").forEach((el) => {
+                    const text = el.getAttribute("data-" + lang);
+                    if (text) el.textContent = text;
+                });
+                document.documentElement.lang = lang;
+            }
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+
+            function toggleMobileMenu() {
+                document
+                    .getElementById("hamburgerBtn")
+                    .classList.toggle("active");
+                document
+                    .getElementById("mobileDropdown")
+                    .classList.toggle("active");
+            }
+
+            const observer = new IntersectionObserver(
+                (entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting)
+                            entry.target.classList.add("visible");
+                    });
+                },
+                { threshold: 0.1 },
+            );
+
+            document
+                .querySelectorAll(".fade-in")
+                .forEach((el) => observer.observe(el));
+
+            let scrollOffset1 = 0,
+                scrollOffset2 = 0,
+                lastScroll = 0;
+            const scrollRow1 = document.getElementById("scrollRow1");
+            const scrollRow2 = document.getElementById("scrollRow2");
+
+            window.addEventListener("scroll", () => {
+                const scrollY = window.pageYOffset;
+                const delta = scrollY - lastScroll;
+                lastScroll = scrollY;
+                scrollOffset1 += delta * 0.5;
+                scrollOffset2 -= delta * 0.35;
+                if (scrollRow1)
+                    scrollRow1.style.transform = `translateX(${-scrollOffset1}px)`;
+                if (scrollRow2)
+                    scrollRow2.style.transform = `translateX(${-scrollOffset2}px)`;
+            });
+
+            window.addEventListener("scroll", () => {
+                const nav = document.getElementById("navbar");
+                nav.style.background =
+                    window.scrollY > 50
+                        ? "rgba(255,255,255,0.92)"
+                        : "rgba(255,255,255,0.7)";
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape") {
+                    closeProject();
+                    closeAbout();
+                    closeForm();
+                    closeFullscreen();
+                    if (
+                        document
+                            .getElementById("mobileDropdown")
+                            .classList.contains("active")
+                    )
+                        toggleMobileMenu();
+                }
+            });
+            const heroVideo = document.getElementById("heroShowreel");
+
+            if (heroVideo && heroVideos.length) {
+                let currentHeroVideo = 0;
+
+                const loadHeroVideo = (index) => {
+                    currentHeroVideo = index % heroVideos.length;
+                    heroVideo.src = heroVideos[currentHeroVideo];
+                    heroVideo.load();
+                    const playPromise = heroVideo.play();
+                    if (
+                        playPromise &&
+                        typeof playPromise.catch === "function"
+                    ) {
+                        playPromise.catch(() => {});
+                    }
+                };
+
+                heroVideo.addEventListener("ended", () => {
+                    loadHeroVideo(currentHeroVideo + 1);
+                });
+
+                loadHeroVideo(0);
+            }
+        </script>
+    </body>
+</html>
