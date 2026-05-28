@@ -199,7 +199,6 @@
                 position: absolute;
                 top: 64px;
                 right: 0;
-                background: rgba(255, 255, 255, 0.97);
                 backdrop-filter: blur(20px);
                 border-radius: 16px;
                 padding: 16px 0;
@@ -588,13 +587,11 @@
                 cursor: pointer;
                 border-radius: 12px;
                 background: var(--surface);
-                aspect-ratio: 4 / 5;
                 min-height: 260px;
             }
 
             .gallery-item-wide {
                 grid-column: 1 / -1;
-                aspect-ratio: 3/1.255;
             }
 
             .gallery-item img,
@@ -610,7 +607,7 @@
             }
 
             .gallery-item video {
-                object-fit: contain;
+                object-fit: cover;
                 background: #000;
                 transform: none !important;
             }
@@ -1878,7 +1875,7 @@
                     title: "Hada distopica (Luneth)",
                     desc: "Diseño de personaje, Texturizado, Rigging",
                     img: "/IDREAM-PAGE/Images/hadaposes.png",
-                    extraMedia: "IDREAM-PAGE/Images/hadapose1.png",
+                    extraMedia: "/IDREAM-PAGE/Images/hadapose1.png",
                     software: "Zbrush, Blender",
                     duration: "60 horas",
                     category: "Esculpido, Texturizado, Riggeado",
@@ -1890,8 +1887,8 @@
                     num: "02",
                     title: "Hatsu Sandia & Abahaca, Hatsu Frambuesa & Rosas",
                     desc: "Renders 3D inspirados en la identidad visual de Hatsu y paisajes oníricos.",
-                    img: "Images/hadaposes.png",
-                    extraMedia: "Images/hadapose1.png",
+                    img: "Images/Hatsusandia3.png",
+                    extraMedia: "Images/Hatsu ia.png",
                     software: "Blender, Affinity",
                     duration: "20 horas",
                     client: "Aureum",
