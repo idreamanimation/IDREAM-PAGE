@@ -2213,30 +2213,29 @@
     }
 
     const durationText = {
-        short: currentLang === "es" ? "Menos de 30 segundos" : "Less than 30 seconds",
+        short: currentLang === "es" ? "menos de 30 segundos" : "less than 30 seconds",
         medium: "30-60 seconds",
         long: "1-3 minutes",
         xl: "3 minutes or more"
     };
 
     const categoryText = {
-        motion: currentLang === "es" ? "Motion Design" : "Motion Design",
-        "3d": currentLang === "es" ? "Animación 3D" : "3D Animation",
-        branding: currentLang === "es" ? "Branding Visual" : "Visual Branding",
-        direction: currentLang === "es" ? "Dirección" : "Direction"
+        motion: currentLang === "es" ? "motion design" : "motion design",
+        "3d": currentLang === "es" ? "animación 3D" : "3D animation",
+        branding: currentLang === "es" ? "branding visual" : "visual branding",
+        direction: currentLang === "es" ? "dirección" : "direction"
     };
 
     const styleText = {
-        abstract: currentLang === "es" ? "Abstracto" : "Abstract",
-        minimal: currentLang === "es" ? "Minimalista" : "Minimal",
-        realistic: currentLang === "es" ? "Realista" : "Realistic",
-        stylized: currentLang === "es" ? "Estilizado" : "Stylized"
+        abstract: currentLang === "es" ? "abstracto" : "abstract",
+        minimal: currentLang === "es" ? "minimalista" : "minimal",
+        realistic: currentLang === "es" ? "realista" : "realistic",
+        stylized: currentLang === "es" ? "estilizado" : "stylized"
     };
 
     const message =
         currentLang === "es"
-            ? `Hey IDREAM!, vengo desde tu sitio web, me llamo ${clientName} tengo un gran proyecto, se llama ${projectName} quiero que mi animacíon tenga una duración aproximada de ${durationText[approxDuration] || approxDuration} en la categoría ${categoryText[category] || category} nuestro estilo es ${styleText[style] || style}
-he pensado en que hagamos ${scenes} escenas y quiero adquirir un plan ${plan}`
+            ? `Hey IDREAM!, vengo desde tu sitio web, me llamo ${clientName} y tengo un gran proyecto, se llama ${projectName}, quiero que mi animacíon tenga una duración aproximada de ${durationText[approxDuration] || approxDuration} en la categoría ${categoryText[category] || category}, nuestro estilo es ${styleText[style] || style} y he pensado en que hagamos ${scenes} escenas y quiero adquirir un plan -> ${plan}`.
             : `Hey IDREAM!, vengo desde tu sitio web, me llamo ${clientName} tengo un gran proyecto, se llama ${projectName} quiero que mi animacíon tenga una duración aproximada de ${durationText[approxDuration] || approxDuration} en la categoría ${categoryText[category] || category} nuestro estilo es ${styleText[style] || style}
 he pensado en que hagamos ${scenes} escenas y quiero adquirir un plan ${plan}`;
 
