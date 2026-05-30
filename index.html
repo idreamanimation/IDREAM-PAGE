@@ -2235,24 +2235,10 @@
 
     const message =
         currentLang === "es"
-            ? `Hey IDREAM🌄, vengo desde tu sitio web.
-
-mi nombre es: ${clientName}
-mi proyecto se llama: ${projectName}
-de una duración aproximada de: ${durationText[approxDuration] || approxDuration}
-en la categoría: ${categoryText[category] || category}
-nuestro estilo es: ${styleText[style] || style}
-he pensado en un numero de escenas: ${scenes}
-y quiero un Plan: ${plan}`
-            : `Hello, I'm writing from your website.
-
-Name: ${clientName}
-Project: ${projectName}
-Approximate duration: ${durationText[approxDuration] || approxDuration}
-Category: ${categoryText[category] || category}
-Style: ${styleText[style] || style}
-Number of scenes: ${scenes}
-Selected plan: ${plan}`;
+            ? `Hey IDREAM!, vengo desde tu sitio web, me llamo ${clientName} tengo un gran proyecto, se llama ${projectName} quiero que mi animacíon tenga una duración aproximada de ${durationText[approxDuration] || approxDuration} en la categoría ${categoryText[category] || category} nuestro estilo es ${styleText[style] || style}
+he pensado en que hagamos ${scenes} escenas y quiero adquirir un plan ${plan}`
+            : `Hey IDREAM!, vengo desde tu sitio web, me llamo ${clientName} tengo un gran proyecto, se llama ${projectName} quiero que mi animacíon tenga una duración aproximada de ${durationText[approxDuration] || approxDuration} en la categoría ${categoryText[category] || category} nuestro estilo es ${styleText[style] || style}
+he pensado en que hagamos ${scenes} escenas y quiero adquirir un plan ${plan}`;
 
     const phoneNumber = "573178032427"; // ejemplo: 573001234567
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
