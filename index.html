@@ -2193,24 +2193,73 @@
             }
 
             function submitForm() {
-                const name = document.getElementById("clientName").value;
-                const project = document.getElementById("projectName").value;
-                if (!name || !project) {
-                    alert(
-                        currentLang === "es"
-                            ? "Por favor completa los campos requeridos."
-                            : "Please fill in the required fields.",
-                    );
-                    return;
-                }
-                alert(
-                    currentLang === "es"
-                        ? "¡Proyecto enviado con éxito!"
-                        : "Project submitted successfully!",
-                );
-                closeForm();
-            }
+    const clientName = document.getElementById("clientName").value.trim();
+    const projectName = document.getElementById("projectName").value.trim();
+    const approxDuration = document.getElementById("approxDuration").value;
+    const category = document.getElementById("category").value;
+    const style = document.getElementById("style").value;
+    const scenes = document.getElementById("scenes").value;
 
+    const selectedPlan = document.querySelector(".plan-card.selected h5");
+    const plan = selectedPlan ? selectedPlan.textContent.trim() : "No seleccionado";
+
+    if (!clientName || !projectName) {
+        alert(
+            currentLang === "es"
+                ? "Por favor completa los campos requeridos."
+                : "Please fill in the required fields."
+        );
+        return;
+    }
+
+    const durationText = {
+        short: currentLang === "es" ? "Menos de 30 segundos" : "Less than 30 seconds",
+        medium: "30-60 seconds",
+        long: "1-3 minutes",
+        xl: "3 minutes or more"
+    };
+
+    const categoryText = {
+        motion: currentLang === "es" ? "Motion Design" : "Motion Design",
+        "3d": currentLang === "es" ? "Animación 3D" : "3D Animation",
+        branding: currentLang === "es" ? "Branding Visual" : "Visual Branding",
+        direction: currentLang === "es" ? "Dirección" : "Direction"
+    };
+
+    const styleText = {
+        abstract: currentLang === "es" ? "Abstracto" : "Abstract",
+        minimal: currentLang === "es" ? "Minimalista" : "Minimal",
+        realistic: currentLang === "es" ? "Realista" : "Realistic",
+        stylized: currentLang === "es" ? "Estilizado" : "Stylized"
+    };
+
+    const message =
+        currentLang === "es"
+            ? `Hola, vengo desde tu sitio web.
+
+Nombre: ${clientName}
+Proyecto: ${projectName}
+Duración aproximada: ${durationText[approxDuration] || approxDuration}
+Categoría: ${categoryText[category] || category}
+Estilo: ${styleText[style] || style}
+Número de escenas: ${scenes}
+Plan elegido: ${plan}`
+            : `Hello, I'm writing from your website.
+
+Name: ${clientName}
+Project: ${projectName}
+Approximate duration: ${durationText[approxDuration] || approxDuration}
+Category: ${categoryText[category] || category}
+Style: ${styleText[style] || style}
+Number of scenes: ${scenes}
+Selected plan: ${plan}`;
+
+    const phoneNumber = "57TU_NUMERO_AQUI"; // ejemplo: 573001234567
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    window.open(whatsappURL, "_blank");
+    closeForm();
+}
             let currentLang = "en";
 
             function setLang(lang) {
